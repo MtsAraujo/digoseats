@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digo Seats — Bancos sob medida para Harley-Davidson</title>
+<meta name="description" content="Bancos de fabricação própria para Harley-Davidson. Escolha o modelo, a costura e as cores, ou peça um banco sob medida.">
+<meta property="og:title" content="Digo Seats">
+<meta property="og:description" content="Bancos de fabricação própria para Harley-Davidson.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iaiomoveis.com.br/">
+<meta name="theme-color" content="#100c0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23100c0a'/%3E%3Cpath d='M8 42C10 30 26 34 34 30C40 20 54 20 56 42Z' fill='%23d9913f'/%3E%3Cpath d='M12 47H52' stroke='%23efe4d0' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=DM+Mono:wght@400;500&family=Saira+Extra+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <a class="marca" href="#inicio" aria-label="Digo Seats — início">
+    <b>DIGO</b><span>Seats<br>sob medida</span>
+  </a>
+  <nav class="menu" aria-label="Principal">
+    <a href="#catalogo" data-filtro="solo">Solo</a>
+    <a href="#catalogo" data-filtro="duplo">Dois lugares</a>
+    <a href="#sob-medida">Sob medida</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <button class="btn-carrinho" id="abrirCarrinho" aria-label="Abrir carrinho">
+    Carrinho <span id="contador">0</span>
+  </button>
+</header>
+
+<main id="inicio">
+
+  <section class="hero">
+    <div class="hero-texto">
+      <p class="etiqueta">Fabricação própria · Harley-Davidson</p>
+      <h1>Banco feito<br>à mão para<br><em>a sua Harley.</em></h1>
+      <p class="hero-sub">Espuma, revestimento e costura feitos banco por banco. Você escolhe o modelo, a costura e as cores — ou manda a ideia e a gente fabrica sob medida.</p>
+      <div class="hero-acoes">
+        <a class="btn btn-cheio" href="#catalogo">Ver catálogo</a>
+        <a class="btn" href="#sob-medida">Pedir sob medida</a>
+      </div>
+    </div>
+    <div class="hero-desenho" id="heroDesenho" aria-hidden="true"></div>
+  </section>
+
+  <div class="faixa" aria-hidden="true">
+    <div class="faixa-trilho">
+      <span>Banco solo</span><i></i><span>Dois lugares</span><i></i><span>Sob medida</span><i></i><span>Feito à mão</span><i></i>
+      <span>Banco solo</span><i></i><span>Dois lugares</span><i></i><span>Sob medida</span><i></i><span>Feito à mão</span><i></i>
+    </div>
+  </div>
+
+  <section class="secao" id="catalogo">
+    <div class="secao-cab">
+      <div>
+        <p class="etiqueta">Catálogo</p>
+        <h2>Escolha o banco</h2>
+      </div>
+      <div class="filtros" role="tablist" aria-label="Filtrar catálogo">
+        <button role="tab" data-filtro="todos" aria-selected="true">Tudo</button>
+        <button role="tab" data-filtro="solo" aria-selected="false">Solo</button>
+        <button role="tab" data-filtro="duplo" aria-selected="false">Dois lugares</button>
+        <button role="tab" data-filtro="acessorio" aria-selected="false">Garupa</button>
+      </div>
+    </div>
+    <div class="grade" id="grade"></div>
+  </section>
+
+  <section class="secao medida" id="sob-medida">
+    <div class="medida-texto">
+      <p class="etiqueta">Sob medida</p>
+      <h2>Não achou?<br>A gente fabrica.</h2>
+      <p>Um formato que não está no catálogo, uma costura diferente, a reforma do banco que já está na moto. Conte como é a moto e o que você quer — respondemos com a proposta e o valor.</p>
+      <ul class="lista-traco">
+        <li>Formato e altura pensados para a sua moto e a sua postura</li>
+        <li>Costura e cores à sua escolha</li>
+        <li>Você aprova o projeto antes de o banco ir para a bancada</li>
+      </ul>
+    </div>
+    <form class="form" id="formMedida">
+      <label>Seu nome
+        <input name="nome" required autocomplete="name">
+      </label>
+      <div class="form-linha">
+        <label>Modelo da moto
+          <input name="moto" required placeholder="Ex: Sportster 883">
+        </label>
+        <label>Ano
+          <input name="ano" inputmode="numeric" placeholder="Ex: 2015">
+        </label>
+      </div>
+      <label>Serviço
+        <select name="peca">
+          <option>Banco novo sob medida</option>
+          <option>Reforma do banco que já tenho</option>
+          <option>Banco e encosto combinando</option>
+          <option>Outro</option>
+        </select>
+      </label>
+      <label>O que você tem em mente
+        <textarea name="ideia" rows="4" required placeholder="Formato, costura, cores, referências…"></textarea>
+      </label>
+      <button class="btn btn-cheio" type="submit">Enviar pedido de orçamento</button>
+      <p class="form-nota" id="notaCanal"></p>
+    </form>
+  </section>
+
+  <section class="secao" id="como-funciona">
+    <div class="secao-cab">
+      <div>
+        <p class="etiqueta">Como funciona</p>
+        <h2>Do pedido à moto</h2>
+      </div>
+    </div>
+    <ol class="passos">
+      <li><span>01</span><h3>Você monta o pedido</h3><p>Escolha o banco, a costura e as cores aqui no site e envie o carrinho.</p></li>
+      <li><span>02</span><h3>Conferimos a moto</h3><p>Confirmamos modelo e ano com você, e fechamos valor, pagamento e prazo.</p></li>
+      <li><span>03</span><h3>Vai para a bancada</h3><p>Espuma, corte, costura e montagem. Cada banco é fabricado para o seu pedido.</p></li>
+      <li><span>04</span><h3>Entrega</h3><p>Combinamos a retirada ou o envio do banco pronto para instalar.</p></li>
+    </ol>
+  </section>
+
+  <section class="secao duvidas">
+    <div class="secao-cab">
+      <div>
+        <p class="etiqueta">Dúvidas</p>
+        <h2>Antes de pedir</h2>
+      </div>
+    </div>
+    <div class="duvidas-lista">
+      <details>
+        <summary>O banco serve na minha moto?</summary>
+        <p>Informe o modelo e o ano no pedido. Antes de fabricar, conferimos com você a compatibilidade com a sua Harley.</p>
+      </details>
+      <details>
+        <summary>Como fico sabendo o valor?</summary>
+        <p>Ao enviar o carrinho, você recebe o valor de cada banco com as opções que escolheu. Nada é cobrado pelo site.</p>
+      </details>
+      <details>
+        <summary>As cores do desenho são as cores reais?</summary>
+        <p>O desenho é uma referência para você visualizar a combinação. As amostras reais de revestimento e de linha são mostradas no atendimento, antes de fechar o pedido.</p>
+      </details>
+      <details>
+        <summary>Posso pedir algo que não está na lista?</summary>
+        <p>Pode. Use o formulário de pedido sob medida e descreva o que precisa.</p>
+      </details>
+      <details>
+        <summary>Como é o pagamento e a entrega?</summary>
+        <p>Forma de pagamento, prazo de fabricação e envio são combinados diretamente no atendimento, ao confirmar o pedido.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="secao contato" id="contato">
+    <p class="etiqueta">Contato</p>
+    <h2>Fale com a Digo Seats</h2>
+    <p>Tire dúvidas e peça orçamento direto com a gente. Os bancos prontos e os projetos em andamento estão no Instagram.</p>
+    <div class="hero-acoes">
+      <a class="btn btn-cheio" id="linkInsta" target="_blank" rel="noopener">@digoseats</a>
+      <a class="btn" id="linkZap" target="_blank" rel="noopener" hidden>WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <span>© <span id="ano"></span> Digo Seats</span>
+  <span>Bancos de fabricação independente. Harley-Davidson é marca registrada de seu titular, citada apenas para indicar compatibilidade.</span>
+</footer>
+
+<!-- Produto -->
+<dialog class="modal" id="modalProduto" aria-labelledby="mpNome">
+  <button class="fechar" data-fechar aria-label="Fechar">×</button>
+  <div class="modal-corpo">
+    <div class="modal-arte" id="mpArte"></div>
+    <form class="modal-info" id="mpForm">
+      <p class="etiqueta" id="mpCat"></p>
+      <h3 id="mpNome"></h3>
+      <p id="mpResumo"></p>
+      <p class="preco" id="mpPreco"></p>
+      <div id="mpOpcoes"></div>
+      <div class="qtd-linha">
+        <div class="qtd">
+          <button type="button" data-qtd="-1" aria-label="Diminuir">−</button>
+          <output id="mpQtd">1</output>
+          <button type="button" data-qtd="1" aria-label="Aumentar">+</button>
+        </div>
+        <button class="btn btn-cheio" type="submit">Adicionar ao carrinho</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Envio pelo Instagram -->
+<dialog class="modal modal-envio" id="modalEnvio" aria-labelledby="meTitulo">
+  <button class="fechar" data-fechar aria-label="Fechar">×</button>
+  <p class="etiqueta">Último passo</p>
+  <h3 id="meTitulo">Envie pelo Instagram</h3>
+  <p>Toque no botão: o texto abaixo é copiado e a conversa com a Digo Seats abre. Lá, <b>cole a mensagem e envie</b>.</p>
+  <textarea id="meTexto" rows="8" readonly></textarea>
+  <a class="btn btn-cheio" id="meAbrir" target="_blank" rel="noopener">Copiar e abrir o Instagram</a>
+  <p class="form-nota">Não abriu a conversa? <a id="mePerfil" target="_blank" rel="noopener">Abra o perfil</a> e toque em “Mensagem”.</p>
+</dialog>
+
+<!-- Carrinho -->
+<div class="veu" id="veu" hidden></div>
+<aside class="carrinho" id="carrinho" aria-label="Carrinho" aria-hidden="true">
+  <div class="carrinho-cab">
+    <h3>Seu pedido</h3>
+    <button class="fechar" id="fecharCarrinho" aria-label="Fechar carrinho">×</button>
+  </div>
+  <div class="carrinho-itens" id="carrinhoItens"></div>
+  <form class="carrinho-pe" id="formPedido">
+    <label>Seu nome
+      <input name="nome" required autocomplete="name">
+    </label>
+    <label>Moto e ano
+      <input name="moto" required placeholder="Ex: Softail Fat Boy 2018">
+    </label>
+    <div class="total"><span>Total</span><b id="total"></b></div>
+    <button class="btn btn-cheio" type="submit" id="btnFinalizar"></button>
+    <p class="form-nota" id="notaPedido"></p>
+  </form>
+</aside>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script src="produtos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
