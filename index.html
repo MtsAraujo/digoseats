@@ -3,29 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Digo Seats — Bancos sob medida para Harley-Davidson</title>
-<meta name="description" content="Bancos de fabricação própria para Harley-Davidson. Escolha o modelo, a costura e as cores, ou peça um banco sob medida.">
+<title>Digo Seats — Bancos de couro sob medida para Harley-Davidson</title>
+<meta name="description" content="Bancos de couro feitos à mão e sob medida para Harley-Davidson, e reformas em geral. Pirituba, São Paulo. Envio para todo o Brasil.">
 <meta property="og:title" content="Digo Seats">
-<meta property="og:description" content="Bancos de fabricação própria para Harley-Davidson.">
+<meta property="og:description" content="Bancos de couro sob medida para Harley-Davidson. Envio para todo o Brasil.">
+<meta property="og:image" content="https://iaiomoveis.com.br/fotos/capitone-duplo.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iaiomoveis.com.br/">
-<meta name="theme-color" content="#100c0a">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23100c0a'/%3E%3Cpath d='M8 42C10 30 26 34 34 30C40 20 54 20 56 42Z' fill='%23d9913f'/%3E%3Cpath d='M12 47H52' stroke='%23efe4d0' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="fotos/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=DM+Mono:wght@400;500&family=Saira+Extra+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=DM+Mono:wght@400;500&family=Rye&family=Saira+Extra+Condensed:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 
 <header class="topo">
   <a class="marca" href="#inicio" aria-label="Digo Seats — início">
-    <b>DIGO</b><span>Seats<br>sob medida</span>
+    <img src="fotos/logo.jpg" alt="Digo Seats" width="150" height="150">
   </a>
   <nav class="menu" aria-label="Principal">
     <a href="#catalogo" data-filtro="solo">Solo</a>
     <a href="#catalogo" data-filtro="duplo">Dois lugares</a>
-    <a href="#sob-medida">Sob medida</a>
+    <a href="#sob-medida">Sob medida e reformas</a>
+    <a href="#na-moto">Na moto</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#contato">Contato</a>
   </nav>
@@ -38,21 +40,24 @@
 
   <section class="hero">
     <div class="hero-texto">
-      <p class="etiqueta">Fabricação própria · Harley-Davidson</p>
+      <p class="etiqueta">Bancos de couro sob medida · São Paulo</p>
       <h1>Banco feito<br>à mão para<br><em>a sua Harley.</em></h1>
-      <p class="hero-sub">Espuma, revestimento e costura feitos banco por banco. Você escolhe o modelo, a costura e as cores — ou manda a ideia e a gente fabrica sob medida.</p>
+      <p class="hero-sub">Fabricação sob medida de bancos de couro e reformas em geral. Você escolhe o modelo e as cores — ou manda a ideia e a gente fabrica. Envio para todo o Brasil.</p>
       <div class="hero-acoes">
-        <a class="btn btn-cheio" href="#catalogo">Ver catálogo</a>
+        <a class="btn btn-cheio" href="#catalogo">Ver modelos</a>
         <a class="btn" href="#sob-medida">Pedir sob medida</a>
       </div>
     </div>
-    <div class="hero-desenho" id="heroDesenho" aria-hidden="true"></div>
+    <figure class="hero-foto">
+      <img src="fotos/capitone-duplo-lado.jpg" alt="Banco de dois lugares em couro preto com costura capitonê e botões cromados" width="1200" height="1278">
+      <figcaption>Capitonê · dois lugares</figcaption>
+    </figure>
   </section>
 
   <div class="faixa" aria-hidden="true">
     <div class="faixa-trilho">
-      <span>Banco solo</span><i></i><span>Dois lugares</span><i></i><span>Sob medida</span><i></i><span>Feito à mão</span><i></i>
-      <span>Banco solo</span><i></i><span>Dois lugares</span><i></i><span>Sob medida</span><i></i><span>Feito à mão</span><i></i>
+      <span>Couro</span><i></i><span>Sob medida</span><i></i><span>Reformas</span><i></i><span>Envio para todo o Brasil</span><i></i>
+      <span>Couro</span><i></i><span>Sob medida</span><i></i><span>Reformas</span><i></i><span>Envio para todo o Brasil</span><i></i>
     </div>
   </div>
 
@@ -60,13 +65,12 @@
     <div class="secao-cab">
       <div>
         <p class="etiqueta">Catálogo</p>
-        <h2>Escolha o banco</h2>
+        <h2>Escolha o modelo</h2>
       </div>
       <div class="filtros" role="tablist" aria-label="Filtrar catálogo">
         <button role="tab" data-filtro="todos" aria-selected="true">Tudo</button>
         <button role="tab" data-filtro="solo" aria-selected="false">Solo</button>
         <button role="tab" data-filtro="duplo" aria-selected="false">Dois lugares</button>
-        <button role="tab" data-filtro="acessorio" aria-selected="false">Garupa</button>
       </div>
     </div>
     <div class="grade" id="grade"></div>
@@ -79,7 +83,8 @@
       <p>Um formato que não está no catálogo, uma costura diferente, a reforma do banco que já está na moto. Conte como é a moto e o que você quer — respondemos com a proposta e o valor.</p>
       <ul class="lista-traco">
         <li>Formato e altura pensados para a sua moto e a sua postura</li>
-        <li>Costura e cores à sua escolha</li>
+        <li>Costura, couro e botões à sua escolha</li>
+        <li>Reforma de bancos e outras peças em couro</li>
         <li>Você aprova o projeto antes de o banco ir para a bancada</li>
       </ul>
     </div>
@@ -100,6 +105,7 @@
           <option>Banco novo sob medida</option>
           <option>Reforma do banco que já tenho</option>
           <option>Banco e encosto combinando</option>
+          <option>Reforma de outra peça em couro</option>
           <option>Outro</option>
         </select>
       </label>
@@ -111,6 +117,24 @@
     </form>
   </section>
 
+  <section class="secao" id="na-moto">
+    <div class="secao-cab">
+      <div>
+        <p class="etiqueta">Na moto</p>
+        <h2>Já estão rodando</h2>
+      </div>
+      <a class="btn" href="https://www.instagram.com/digoseats/" target="_blank" rel="noopener">Ver mais no Instagram</a>
+    </div>
+    <div class="galeria">
+      <img src="fotos/moto-softail-preta.jpg" alt="Softail preta com banco Digo Seats" loading="lazy" width="520" height="524">
+      <img src="fotos/moto-sportster-creme.jpg" alt="Sportster com banco em couro claro" loading="lazy" width="520" height="524">
+      <img src="fotos/moto-mar.jpg" alt="Banco com costura diamante em moto parada à beira-mar" loading="lazy" width="520" height="524">
+      <img src="fotos/moto-sportster-guidao.jpg" alt="Sportster com banco e encosto alto" loading="lazy" width="520" height="524">
+      <img src="fotos/moto-softail-verde.jpg" alt="Softail verde com banco de dois lugares" loading="lazy" width="520" height="524">
+      <img src="fotos/detalhe-couro-marrom.jpg" alt="Detalhe de couro marrom com botões e costura aparente" loading="lazy" width="520" height="524">
+    </div>
+  </section>
+
   <section class="secao" id="como-funciona">
     <div class="secao-cab">
       <div>
@@ -119,10 +143,10 @@
       </div>
     </div>
     <ol class="passos">
-      <li><span>01</span><h3>Você monta o pedido</h3><p>Escolha o banco, a costura e as cores aqui no site e envie o carrinho.</p></li>
+      <li><span>01</span><h3>Você monta o pedido</h3><p>Escolha o modelo e as cores aqui no site e envie o carrinho pelo WhatsApp.</p></li>
       <li><span>02</span><h3>Conferimos a moto</h3><p>Confirmamos modelo e ano com você, e fechamos valor, pagamento e prazo.</p></li>
-      <li><span>03</span><h3>Vai para a bancada</h3><p>Espuma, corte, costura e montagem. Cada banco é fabricado para o seu pedido.</p></li>
-      <li><span>04</span><h3>Entrega</h3><p>Combinamos a retirada ou o envio do banco pronto para instalar.</p></li>
+      <li><span>03</span><h3>Vai para a bancada</h3><p>Espuma, corte do couro, costura e montagem. Cada banco é fabricado para o seu pedido.</p></li>
+      <li><span>04</span><h3>Entrega</h3><p>Retirada em Pirituba, São Paulo, ou envio para todo o Brasil.</p></li>
     </ol>
   </section>
 
@@ -136,15 +160,19 @@
     <div class="duvidas-lista">
       <details>
         <summary>O banco serve na minha moto?</summary>
-        <p>Informe o modelo e o ano no pedido. Antes de fabricar, conferimos com você a compatibilidade com a sua Harley.</p>
+        <p>Informe o modelo e o ano no pedido. Antes de fabricar, conferimos com você a compatibilidade com a sua moto. Para motos de outras marcas, consulte no atendimento.</p>
       </details>
       <details>
         <summary>Como fico sabendo o valor?</summary>
         <p>Ao enviar o carrinho, você recebe o valor de cada banco com as opções que escolheu. Nada é cobrado pelo site.</p>
       </details>
       <details>
-        <summary>As cores do desenho são as cores reais?</summary>
-        <p>O desenho é uma referência para você visualizar a combinação. As amostras reais de revestimento e de linha são mostradas no atendimento, antes de fechar o pedido.</p>
+        <summary>O banco vem igual ao da foto?</summary>
+        <p>As fotos são de bancos já entregues e mostram o modelo e a costura. O seu é fabricado nas cores que você escolher; o desenho colorido é só uma referência da combinação, e as amostras reais de couro e de linha são mostradas no atendimento.</p>
+      </details>
+      <details>
+        <summary>Vocês reformam o banco que eu já tenho?</summary>
+        <p>Sim. Fazemos reformas em geral: use o formulário de pedido sob medida, escolha “Reforma” e conte o que precisa.</p>
       </details>
       <details>
         <summary>Posso pedir algo que não está na lista?</summary>
@@ -152,7 +180,7 @@
       </details>
       <details>
         <summary>Como é o pagamento e a entrega?</summary>
-        <p>Forma de pagamento, prazo de fabricação e envio são combinados diretamente no atendimento, ao confirmar o pedido.</p>
+        <p>Enviamos para todo o Brasil, ou você retira em Pirituba, São Paulo. Forma de pagamento, prazo de fabricação e frete são combinados no atendimento, ao confirmar o pedido.</p>
       </details>
     </div>
   </section>
@@ -161,6 +189,7 @@
     <p class="etiqueta">Contato</p>
     <h2>Fale com a Digo Seats</h2>
     <p>Tire dúvidas e peça orçamento direto com a gente. Os bancos prontos e os projetos em andamento estão no Instagram.</p>
+    <p class="endereco">Pirituba · São Paulo, SP · Envio para todo o Brasil</p>
     <div class="hero-acoes">
       <a class="btn btn-cheio" id="linkInsta" target="_blank" rel="noopener">@digoseats</a>
       <a class="btn" id="linkZap" target="_blank" rel="noopener" hidden>WhatsApp</a>

@@ -4,7 +4,7 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const reais = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  const NOME_CAT = { solo: 'Solo', duplo: 'Dois lugares', acessorio: 'Garupa e encosto' };
+  const NOME_CAT = { solo: 'Solo', duplo: 'Dois lugares' };
 
   /* ---------- desenho dos bancos ---------- */
   // Cada banco é desenhado em duas vistas: de cima (com a costura) e de lado.
@@ -21,7 +21,7 @@
     pillion:   { de: 130, ate: 280, planta: [[142, 30], [175, 40], [235, 40], [268, 30]], perfil: [[140, 16], [180, 20], [240, 20], [272, 14]] },
     encosto:   { de: 140, ate: 268, planta: [[150, 30], [176, 44], [232, 44], [258, 30]], perfil: [[150, 22], [180, 28], [228, 28], [258, 22]] },
   };
-  const TIPO_COSTURA = { 'Diamante': 'diamante', 'Gomos transversais': 'transversal', 'Gomos longitudinais': 'longitudinal' };
+  const TIPO_COSTURA = { 'Capitonê': 'capitone', 'Diamante': 'diamante', 'Gomos transversais': 'transversal', 'Gomos longitudinais': 'longitudinal', 'Ondas': 'ondas', 'Chevron': 'chevron' };
 
   const r = (n) => Math.round(n * 100) / 100;
   // Curva suave que passa por todos os pontos (Catmull-Rom em Bézier)
@@ -37,7 +37,7 @@
   }
 
   let nArte = 0;
-  // o = { costura, couro, fio }: sem cores, sai o desenho técnico em linha
+  // o = { costura, couro, fio, botao }: sem cores, sai o desenho técnico em linha
   function arte(tipo, o = {}) {
     const a = ARTES[tipo];
     if (!a) return '';
@@ -48,9 +48,24 @@
     // vista de cima
     const planta = curva([[x0, cy], ...a.planta.map(([x, m]) => [x, cy - m]), [xN, cy], ...a.planta.map(([x, m]) => [x, cy + m]).reverse()], true);
     const recuo = `translate(${cx} ${cy}) scale(${r((L - 20) / L)} ${r((2 * w - 20) / (2 * w))}) translate(${-cx} ${-cy})`;
-    let fios = '';
+    let fios = '', botoes = '';
     const c = TIPO_COSTURA[o.costura];
-    if (c === 'diamante') for (let x = x0 - 2 * w; x < xN; x += 20) fios += `M${x} ${cy - w}l${2 * w} ${2 * w}M${x + 2 * w} ${cy - w}l${-2 * w} ${2 * w}`;
+    if (c === 'diamante') for (let x = x0 - 2 * w; x < xN; x += 20) {
+      fios += `M${x} ${cy - w}l${2 * w} ${2 * w}M${x + 2 * w} ${cy - w}l${-2 * w} ${2 * w}`;
+      if (o.botao) botoes += `<circle class="botao" cx="${x + w}" cy="${cy}" r="2.4"/>`;
+    }
+    if (c === 'capitone') {
+      fios += `M${x0} ${cy}h${L}`;
+      for (let x = x0 + 30; x < xN - 12; x += 28) {
+        fios += `M${x} ${cy - w}v${2 * w}`;
+        botoes += `<circle class="botao" cx="${x}" cy="${cy}" r="3"/>`;
+      }
+    }
+    if (c === 'ondas') for (let y = cy - 39; y <= cy + 39; y += 13) {
+      fios += `M${x0} ${y}q11 -9 22 0`;
+      for (let x = x0 + 22; x < xN; x += 22) fios += 't22 0';
+    }
+    if (c === 'chevron') for (let x = x0 - w; x < xN; x += 14) fios += `M${x} ${cy - w}L${r(x + w * 0.6)} ${cy}L${x} ${cy + w}`;
     if (c === 'transversal') for (let x = x0 + 22; x < xN - 10; x += 15) fios += `M${x} ${cy - w}v${2 * w}`;
     if (c === 'longitudinal') for (let y = cy - 39; y <= cy + 39; y += 13) fios += `M${x0} ${y}h${L}`;
 
@@ -59,6 +74,7 @@
     s += `<path class="couro" d="${planta}"/>`;
     if (fios) s += `<path class="costura" d="${fios}" clip-path="url(#${id})"/>`;
     s += `<path class="costura" d="${planta}" transform="${recuo}" vector-effect="non-scaling-stroke"/>`;
+    if (botoes) s += `<g clip-path="url(#${id})">${botoes}</g>`;
 
     // vista de lado
     if (a.encosto) {
@@ -80,13 +96,14 @@
     s += `<path class="cota" d="M${x0} 285V295M${xN} 285V295M${x0} 290H${xN}"/>`;
     s += `<text class="cota-txt" x="${x0 + 8}" y="284">COMP.</text>`;
 
-    const cores = o.couro ? ` style="--couro:${esc(o.couro)};--fio:${esc(o.fio || '#f1ece0')}"` : '';
+    const cores = o.couro ? ` style="--couro:${esc(o.couro)};--fio:${esc(o.fio || '#f1ece0')};--botao:${esc(o.botao || '#dcdcdc')}"` : '';
     return `<svg class="arte" viewBox="0 0 400 300" role="img" aria-label="Desenho do banco: vista de cima e de lado"${cores}>${s}</svg>`;
   }
 
-  const visual = (p, o) => p.foto
-    ? `<img src="${esc(p.foto)}" alt="${esc(p.nome)}" loading="lazy">`
-    : arte(p.arte, { costura: p.costura, ...o });
+  const fotosDe = (p) => p.fotos || [];
+  const visual = (p) => fotosDe(p).length
+    ? `<img src="${esc(p.fotos[0])}" alt="Banco ${esc(p.nome)}" loading="lazy">`
+    : arte(p.arte, { costura: p.costura });
   const precoTxt = (p) => (p.preco ? reais(p.preco) : 'Sob consulta');
 
   /* ---------- catálogo ---------- */
@@ -112,16 +129,29 @@
   /* ---------- produto ---------- */
   const modal = $('#modalProduto');
   let atual = null, qtd = 1;
-  // O desenho acompanha a costura e as cores escolhidas
+  // A foto mostra o modelo; o desenho acompanha as cores escolhidas
   function pintarArte() {
     if (!atual) return;
     const o = Object.fromEntries(new FormData($('#mpForm')));
-    $('#mpArte').innerHTML = visual(atual, {
+    $('#mpPrevia').innerHTML = arte(atual.arte, {
       costura: o['Costura'] || atual.costura,
-      couro: CORES_COURO[o['Cor do revestimento']],
+      couro: CORES_COURO[o['Cor do couro']],
       fio: CORES_LINHA[o['Cor da linha']],
+      botao: BOTOES[o['Botões']],
     });
   }
+  function montarArte() {
+    const fotos = fotosDe(atual);
+    $('#mpArte').innerHTML = (fotos.length ? `<div class="foto"><img id="mpFoto" src="${esc(fotos[0])}" alt="Banco ${esc(atual.nome)}"></div>` : '')
+      + (fotos.length > 1 ? `<div class="miniaturas">${fotos.map((f, i) => `<button type="button" data-foto="${esc(f)}" aria-label="Foto ${i + 1}"${i === 0 ? ' aria-current="true"' : ''}><img src="${esc(f)}" alt="" loading="lazy"></button>`).join('')}</div>` : '')
+      + '<div class="previa"><small>Sua combinação · desenho ilustrativo</small><div id="mpPrevia"></div></div>';
+  }
+  $('#mpArte').addEventListener('click', (e) => {
+    const m = e.target.closest('[data-foto]');
+    if (!m) return;
+    $('#mpFoto').src = m.dataset.foto;
+    $$('#mpArte [data-foto]').forEach((x) => x.toggleAttribute('aria-current', x === m));
+  });
   function abrirProduto(id) {
     atual = PRODUTOS.find((p) => p.id === id);
     if (!atual) return;
@@ -135,11 +165,12 @@
     $('#mpOpcoes').innerHTML = Object.entries(grupos).map(([nome, vals]) => `
       <fieldset><legend>${esc(nome)}</legend><div class="chips">
         ${vals.map((v, i) => {
-          const cor = nome === 'Cor do revestimento' ? CORES_COURO[v] : nome === 'Cor da linha' ? CORES_LINHA[v] : '';
+          const cor = nome === 'Cor do couro' ? CORES_COURO[v] : nome === 'Cor da linha' ? CORES_LINHA[v] : nome === 'Botões' ? BOTOES[v] : '';
           const marcado = nome === 'Costura' ? v === atual.costura : i === 0;
           return `<label><input type="radio" name="${esc(nome)}" value="${esc(v)}"${marcado ? ' checked' : ''}><span>${cor ? `<i style="background:${esc(cor)}"></i>` : ''}${esc(v)}</span></label>`;
         }).join('')}
       </div></fieldset>`).join('');
+    montarArte();
     pintarArte();
     modal.showModal();
   }
@@ -288,7 +319,6 @@
   }
   $('#ano').textContent = new Date().getFullYear();
 
-  $('#heroDesenho').innerHTML = arte('stepup', { costura: 'Diamante', couro: CORES_COURO['Caramelo'], fio: CORES_LINHA['Branca'] });
   desenharGrade();
   desenharCarrinho();
 })();
